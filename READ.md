@@ -91,15 +91,15 @@ mvn spring-boot:run
 - 中英文幣別名稱對應
 
 ### 3. **資料庫設計**
-```sql
-CREATE TABLE currency (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    code VARCHAR(10) NOT NULL UNIQUE,
-    chinese_name VARCHAR(50) NOT NULL,
-    created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-```
+- 使用 **JPA Entity** 自動建立資料表結構
+- **data.sql** 提供初始化資料
+- **H2 資料庫** 支援記憶體內快速存取
+
+**資料表欄位說明：**
+- `id`: 主鍵，自動遞增
+- `code`: 幣別代碼 (如 USD, EUR)，唯一鍵
+- `chinese_name`: 幣別中文名稱
+- `created_time`, `updated_time`: 時間戳記
 
 ## 🧪 測試說明
 
@@ -107,23 +107,26 @@ CREATE TABLE currency (
 啟動專案後，直接在瀏覽器訪問 API 端點進行測試。
 
 ### Chrome 開發者工具測試
-```javascript
-// 查詢所有幣別
-fetch('http://localhost:8080/api/currencies')
-  .then(response => response.json())
-  .then(data => console.log('所有幣別:', data));
+在 Chrome 瀏覽器中按 F12 開啟開發者工具，切換至 Console 分頁
 
-// 新增幣別
-fetch('http://localhost:8080/api/currencies', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    code: 'KRW',
-    chineseName: '韓元'
-  })
-})
-.then(response => response.json())
-.then(data => console.log('新增成功:', data));
+```javascript
+//提醒： 某些瀏覽器可能需要先手動允許貼上程式碼如下:
+allow pasting //允許瀏覽器貼上程式碼
+
+// 查詢所有幣別
+fetch('http://localhost:8080/api/currencies') .then(response => response.json()) .then(data => { console.log('所有幣別:', data); });
+
+// 查詢美元
+fetch('http://localhost:8080/api/currencies/USD') .then(response => response.json()) .then(data => { console.log('USD 幣別資訊:', data); });
+
+// 新增韓元
+fetch('http://localhost:8080/api/currencies', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: 'KRW', chineseName: '韓元' }) }) .then(response => response.json()) .then(data => { console.log('新增成功:', data); });
+
+// 更新韓元名稱
+fetch('http://localhost:8080/api/currencies/KRW', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: 'KRW', chineseName: '南韓韓元' }) }) .then(response => response.json()) .then(data => { console.log('更新成功:', data); });
+
+// 刪除韓元
+fetch('http://localhost:8080/api/currencies/KRW', { method: 'DELETE' }) .then(response => { if(response.ok) { console.log('刪除成功'); } });
 ```
 
 ## 📋 作業需求對照
