@@ -2,7 +2,7 @@
 
 ## 📋 專案概述
 
-本專案為**國泰世華銀行 Java Engineer 線上作業**，使用 Spring Boot 框架開發 RESTful API，實現 CoinDesk API 串接與幣別資料管理功能。
+本專案為**Java Engineer 線上作業**，使用 Spring Boot 框架開發 RESTful API，實現 CoinDesk API 串接與幣別資料管理功能。
 
 ## 🛠 技術規格
 
@@ -168,5 +168,5 @@ fetch('http://localhost:8080/api/currencies/KRW', { method: 'DELETE' }) .then(re
 ---
 
 **開發者**: JiangJones  
-**專案用途**: 國泰世華銀行 Java Engineer 線上作業  
+**專案用途**: Java Engineer 線上作業  
 **完成日期**: 2025年8月22號
