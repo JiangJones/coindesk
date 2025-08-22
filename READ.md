@@ -59,6 +59,51 @@ mvn spring-boot:run
 - http://localhost:8080/api/currencies
 - http://localhost:8080/h2-console (H2 資料庫控制台)
 
+## 🧪 測試執行
+
+### 單元測試執行
+```bash
+# 執行所有單元測試
+mvn test
+
+# 僅執行特定測試類別
+mvn test -Dtest=CoinDeskServiceTest
+```
+
+**測試涵蓋範圍：**
+- ✅ **資料轉換邏輯單元測試** - 時間格式轉換、幣別名稱對應
+- ✅ **CRUD API 功能測試** - 幣別資料增刪改查
+- ✅ **CoinDesk API 整合測試** - 外部 API 呼叫與資料處理
+- ✅ **邊界情況測試** - 異常處理、空值處理
+
+### API 功能測試
+
+**瀏覽器測試：**
+啟動專案後，直接在瀏覽器訪問 API 端點進行測試。
+
+**Chrome 開發者工具測試：**
+在 Chrome 瀏覽器中按 F12 開啟開發者工具，切換至 Console 分頁
+
+```javascript
+//提醒： 某些瀏覽器可能需要先手動允許貼上程式碼如下:
+allow pasting //允許瀏覽器貼上程式碼
+
+// 查詢所有幣別
+fetch('http://localhost:8080/api/currencies') .then(response => response.json()) .then(data => { console.log('所有幣別:', data); });
+
+// 查詢美元
+fetch('http://localhost:8080/api/currencies/USD') .then(response => response.json()) .then(data => { console.log('USD 幣別資訊:', data); });
+
+// 新增韓元
+fetch('http://localhost:8080/api/currencies', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: 'KRW', chineseName: '韓元' }) }) .then(response => response.json()) .then(data => { console.log('新增成功:', data); });
+
+// 更新韓元名稱
+fetch('http://localhost:8080/api/currencies/KRW', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: 'KRW', chineseName: '南韓韓元' }) }) .then(response => response.json()) .then(data => { console.log('更新成功:', data); });
+
+// 刪除韓元
+fetch('http://localhost:8080/api/currencies/KRW', { method: 'DELETE' }) .then(response => { if(response.ok) { console.log('刪除成功'); } });
+```
+
 ## 📚 API 文件
 
 ### 幣別管理 API
@@ -101,34 +146,6 @@ mvn spring-boot:run
 - `chinese_name`: 幣別中文名稱
 - `created_time`, `updated_time`: 時間戳記
 
-## 🧪 測試說明
-
-### 瀏覽器測試
-啟動專案後，直接在瀏覽器訪問 API 端點進行測試。
-
-### Chrome 開發者工具測試
-在 Chrome 瀏覽器中按 F12 開啟開發者工具，切換至 Console 分頁
-
-```javascript
-//提醒： 某些瀏覽器可能需要先手動允許貼上程式碼如下:
-allow pasting //允許瀏覽器貼上程式碼
-
-// 查詢所有幣別
-fetch('http://localhost:8080/api/currencies') .then(response => response.json()) .then(data => { console.log('所有幣別:', data); });
-
-// 查詢美元
-fetch('http://localhost:8080/api/currencies/USD') .then(response => response.json()) .then(data => { console.log('USD 幣別資訊:', data); });
-
-// 新增韓元
-fetch('http://localhost:8080/api/currencies', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: 'KRW', chineseName: '韓元' }) }) .then(response => response.json()) .then(data => { console.log('新增成功:', data); });
-
-// 更新韓元名稱
-fetch('http://localhost:8080/api/currencies/KRW', { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: 'KRW', chineseName: '南韓韓元' }) }) .then(response => response.json()) .then(data => { console.log('更新成功:', data); });
-
-// 刪除韓元
-fetch('http://localhost:8080/api/currencies/KRW', { method: 'DELETE' }) .then(response => { if(response.ok) { console.log('刪除成功'); } });
-```
-
 ## 📋 作業需求對照
 
 | 需求項目 | 實作狀態 | 說明 |
@@ -140,6 +157,10 @@ fetch('http://localhost:8080/api/currencies/KRW', { method: 'DELETE' }) .then(re
 | 幣別 CRUD API | ✅ | 完整實作查詢/新增/修改/刪除功能 |
 | CoinDesk API 串接 | ✅ | 整合外部 API 並進行資料轉換 |
 | 單元測試 | ✅ | 涵蓋核心業務邏輯測試 |
+| 資料轉換測試 | ✅ | 針對資料轉換邏輯作單元測試 |
+| CRUD API 測試 | ✅ | 測試幣別對應表資料 CRUD API |
+| CoinDesk API 測試 | ✅ | 測試呼叫 CoinDesk API |
+| 轉換 API 測試 | ✅ | 測試資料轉換的 API |
 
 ## 📞 聯絡資訊
 
