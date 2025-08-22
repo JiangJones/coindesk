@@ -162,10 +162,6 @@ fetch('http://localhost:8080/api/currencies/KRW', { method: 'DELETE' }) .then(re
 | CoinDesk API 測試 | ✅ | 測試呼叫 CoinDesk API |
 | 轉換 API 測試 | ✅ | 測試資料轉換的 API |
 
-## 📞 聯絡資訊
-
-如有任何問題或建議，歡迎透過 GitHub Issues 或 Pull Request 與我聯繫。
-
 ---
 
 **開發者**: JiangJones  
