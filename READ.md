@@ -43,7 +43,7 @@ coindesk-api/
 
 ### 啟動步驟
 ```bash
-# 1. 克隆專案
+# 1. clone專案
 git clone https://github.com/JiangJones/coindesk.git
 cd coindesk
 
