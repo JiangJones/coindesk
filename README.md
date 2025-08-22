@@ -2,7 +2,7 @@
 
 ## 📋 專案概述
 
-本專案為**Java Engineer 線上作業**，使用 Spring Boot 框架開發 RESTful API，實現 CoinDesk API 串接與幣別資料管理功能。
+本專案為** Java Engineer 線上作業**，使用 Spring Boot 框架開發 RESTful API，實現 CoinDesk API 串接與幣別資料管理功能。
 
 ## 🛠 技術規格
 
