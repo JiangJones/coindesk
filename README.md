@@ -170,4 +170,4 @@ fetch('http://localhost:8080/api/currencies/KRW', { method: 'DELETE' }) .then(re
 
 **開發者**: JiangJones  
 **專案用途**: 國泰世華銀行 Java Engineer 線上作業  
-**完成日期**: 2025年
+**完成日期**: 2025年8月22號
